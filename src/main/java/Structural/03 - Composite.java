@@ -1,0 +1,8 @@
+package Structural;
+
+class Composite {
+
+
+
+
+}
