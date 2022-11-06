@@ -28,8 +28,7 @@ package Structural;//Step 1
 
 //        Step 3
 //        Create abstract decorator class implementing the Shape interface.
-//
-//        ShapeDecorator.java
+
 
  abstract class ShapeDecorator implements IShape {
     protected IShape decoratedShape;
@@ -69,11 +68,11 @@ package Structural;//Step 1
  class DecoratorPatternDemo {
     public static void main(String[] args) {
 
-        IShape circle = new DCircle();
+        var circle = new DCircle();
 
-        IShape redCircle = new RedShapeDecorator(new DCircle());
+        var redCircle = new RedShapeDecorator(new DCircle());
 
-        IShape redRectangle = new RedShapeDecorator(new Rectangle());
+        var redRectangle = new RedShapeDecorator(new Rectangle());
         System.out.println("Circle with normal border");
         circle.draw();
 
