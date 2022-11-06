@@ -35,7 +35,7 @@ class Employee {
     }
 
     public String toString() {
-        return ("Employee :[ Name : " + name + ", dept : " + dept + ", salary :" + salary + " ]");
+        return ("Employee :[ Name : %s, dept : %s, salary :%d ]".formatted(name, dept, salary));
     }
 }
 //        Step 2
@@ -66,6 +66,8 @@ class CompositePatternDemo {
         headMarketing.add(clerk1);
         headMarketing.add(clerk2);
 
+        System.out.println(CEO);
+
         //print all employees of the organization
         System.out.println(CEO);
 
@@ -78,6 +80,7 @@ class CompositePatternDemo {
         }
     }
 }
+
 
 //        Step 3
 //        Verify the output.

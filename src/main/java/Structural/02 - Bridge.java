@@ -1,14 +1,15 @@
 package Structural;
 
-
 //        Step 1
 //        Create bridge implementer interface.
 
+
  interface DrawAPI {
-    void drawCircle(int radius, int x, int y);
+    public void drawCircle(int radius, int x, int y);
 }
 //        Step 2
 //        Create concrete bridge implementer classes implementing the DrawAPI interface.
+
 
  class RedCircle implements DrawAPI {
     @Override
@@ -28,6 +29,7 @@ package Structural;
 //        Step 3
 //        Create an abstract class Shape using the DrawAPI interface.
 
+
  abstract class Shape {
     protected DrawAPI drawAPI;
 
@@ -39,11 +41,8 @@ package Structural;
 //        Step 4
 //        Create concrete class implementing the Shape interface.
 
-
  class Circle extends Shape {
-    private final int x;
-     private final int y;
-     private final int radius;
+    private int x, y, radius;
 
     public Circle(int x, int y, int radius, DrawAPI drawAPI) {
         super(drawAPI);
@@ -56,7 +55,7 @@ package Structural;
         drawAPI.drawCircle(radius,x,y);
     }
 }
-//       Step 5
+//        Step 5
 //        Use the Shape and DrawAPI classes to draw different colored circles.
 
 
