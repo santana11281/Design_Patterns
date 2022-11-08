@@ -45,7 +45,7 @@ import java.util.List;
 //        Step 3
 //        Create CareTaker class
  class CareTaker {
-    private List<Memento> mementoList = new ArrayList<Memento>();
+    private final List<Memento> mementoList = new ArrayList<>();
 
     public void add(Memento state){
         mementoList.add(state);
