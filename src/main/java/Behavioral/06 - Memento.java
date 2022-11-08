@@ -6,14 +6,14 @@ import java.util.List;
 
 //        Step 1
 //        Create Memento class.
- class Memento {
+class Memento {
     private String state;
 
-    public Memento(String state){
+    public Memento(String state) {
         this.state = state;
     }
 
-    public String getState(){
+    public String getState() {
         return state;
     }
 }
@@ -21,22 +21,22 @@ import java.util.List;
 
 //        Step 2
 //        Create Originator class
- class Originator {
+class Originator {
     private String state;
 
-    public void setState(String state){
+    public void setState(String state) {
         this.state = state;
     }
 
-    public String getState(){
+    public String getState() {
         return state;
     }
 
-    public Memento saveStateToMemento(){
+    public Memento saveStateToMemento() {
         return new Memento(state);
     }
 
-    public void getStateFromMemento(Memento memento){
+    public void getStateFromMemento(Memento memento) {
         state = memento.getState();
     }
 }
@@ -44,14 +44,14 @@ import java.util.List;
 
 //        Step 3
 //        Create CareTaker class
- class CareTaker {
+class CareTaker {
     private final List<Memento> mementoList = new ArrayList<>();
 
-    public void add(Memento state){
+    public void add(Memento state) {
         mementoList.add(state);
     }
 
-    public Memento get(int index){
+    public Memento get(int index) {
         return mementoList.get(index);
     }
 }
@@ -59,7 +59,7 @@ import java.util.List;
 
 //        Step 4
 //        Use CareTaker and Originator objects.
- class MementoPatternDemo {
+class MementoPatternDemo {
     public static void main(String[] args) {
 
         Originator originator = new Originator();
