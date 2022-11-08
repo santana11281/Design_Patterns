@@ -3,18 +3,18 @@ package Behavioral;
 
 //        Step 1
 //        Create an expression interface.
- interface Expression {
+interface Expression {
     boolean interpret(String context);
 }
 
 
 //        Step 2
 //        Create concrete classes implementing the above interface.
- class TerminalExpression implements Expression {
+class TerminalExpression implements Expression {
 
     private final String data;
 
-    public TerminalExpression(String data){
+    public TerminalExpression(String data) {
         this.data = data;
     }
 
@@ -26,7 +26,7 @@ package Behavioral;
 }
 
 
- class OrExpression implements Expression {
+class OrExpression implements Expression {
 
     private Expression expr1 = null;
     private Expression expr2 = null;
@@ -43,7 +43,7 @@ package Behavioral;
 }
 
 
- class AndExpression implements Expression {
+class AndExpression implements Expression {
 
     private Expression expr1 = null;
     private Expression expr2 = null;
@@ -61,17 +61,17 @@ package Behavioral;
 
 //        Step 3
 //        InterpreterPatternDemo uses Expression class to create rules and then parse them.
- class InterpreterPatternDemo {
+class InterpreterPatternDemo {
 
     //Rule: Robert and John are male
-    public static Expression getMaleExpression(){
+    public static Expression getMaleExpression() {
         Expression robert = new TerminalExpression("Robert");
         Expression john = new TerminalExpression("John");
         return new OrExpression(robert, john);
     }
 
     //Rule: Julie is a married women
-    public static Expression getMarriedWomanExpression(){
+    public static Expression getMarriedWomanExpression() {
         Expression julie = new TerminalExpression("Julie");
         Expression married = new TerminalExpression("Married");
         return new AndExpression(julie, married);
