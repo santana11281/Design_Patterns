@@ -1,15 +1,13 @@
 package Behavioral;
 
-//        Step 1
-//        Create Subject class.
-
-
 import java.util.ArrayList;
 import java.util.List;
 
+//        Step 1
+//        Create Subject class.
 class Subject {
 
-    private List<Observer> observers = new ArrayList<Observer>();
+    private final List<Observer> observers = new ArrayList<Observer>();
     private int state;
 
     public int getState() {
