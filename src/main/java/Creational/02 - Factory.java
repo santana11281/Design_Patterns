@@ -1,23 +1,21 @@
 package Creational;
+
+
 //        Step 1
 //        Create an interface.
-//        Shape.java
-
 interface Shape {
     void draw();
 }
 
 //        Step 2
 //        Create concrete classes implementing the same interface.
-//        Rectangle.java
-
 class FRectangle implements Shape {
-
 
     @Override
     public void draw() {
         System.out.println("Inside Rectangle::draw() method.");
     }
+
 }
 
 
@@ -27,6 +25,7 @@ class Square implements Shape {
     public void draw() {
         System.out.println("Inside Square::draw() method.");
     }
+
 }
 
 
@@ -36,36 +35,33 @@ class Circle implements Shape {
     public void draw() {
         System.out.println("Inside Circle::draw() method.");
     }
+
 }
+
 
 //        Step 3
 //        Create a Factory to generate object of concrete class based on given information.
-//        ShapeFactory.java
-
 class FShapeFactory extends AbstractFactory {
 
     //use getShape method to get object of type shape
     public Shape getShape(String shapeType) {
 
-        if (shapeType == null) {
+        if (shapeType == null)
             return null;
-        } else {
+        else
             return switch (shapeType) {
             case "CIRCLE" -> new Circle();
             case "RECTANGLE" -> new FRectangle();
             case "SQUARE" -> new Square();
             default -> null;
         };
-        }
 
     }
 }
-/*
-        Step 4
-        Use the Factory to get object of concrete class by passing an information such as type.
-        FactoryPatternDemo.java
-*/
 
+
+//        Step 4
+//        Use the Factory to get object of concrete class by passing an information such as type.
 class FactoryPatternDemo {
 
     public static void main(String[] args) {
@@ -90,7 +86,9 @@ class FactoryPatternDemo {
         shape3.draw();
     }
 }
-//Step 5
+
+
+//        Step 5
 //        Verify the output.
 //
 //        Inside Circle::draw() method.

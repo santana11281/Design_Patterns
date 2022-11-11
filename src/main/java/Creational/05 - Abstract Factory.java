@@ -36,12 +36,11 @@ package Creational;//Step 1
 
 //        Step 3
 //        Create an Abstract class to get factories for Normal and Rounded Shape Objects.
-//
-//        AbstractFactory.java
-
  abstract class AbstractFactory {
     abstract Shape getShape(String shapeType) ;
 }
+
+
 //Step 4
 //        Create Factory classes extending AbstractFactory to generate object of concrete class based on given information.
 //

@@ -1,112 +1,142 @@
-package Creational;// By making this class cloneable you are telling Java
-// that it is ok to copy instances of this class
-// These instance copies have different results when
-// System.identityHashCode(System.identityHashCode(bike))
-// is called
+package Creational;
 
- interface Animal extends Cloneable {
+import java.util.Hashtable;
+import java.util.LinkedList;
 
-   public Animal makeCopy();
+
+//        Step 1
+//        Create an abstract class implementing Clonable interface.
+ abstract class PShape implements Cloneable {
+
+    private String id;
+    protected String type;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    abstract void draw();
+
+
+
+    public Object clone() {
+        Object clone = null;
+
+        try {
+            clone = super.clone();
+
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        return clone;
+    }
+}
+
+
+//        Step 2
+//        Create concrete classes extending the above class.
+ class PRectangle extends PShape {
+
+    public PRectangle(){
+        type = "Rectangle";
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("Inside Rectangle::draw() method.");
+    }
+}
+
+
+ class PSquare extends PShape {
+
+    public PSquare(){
+        type = "Square";
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("Inside Square::draw() method.");
+    }
+}
+
+
+ class PCircle extends PShape {
+
+    public PCircle(){
+        type = "Circle";
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("Inside Circle::draw() method.");
+    }
 
 }
 
 
+//        Step 3
+//        Create a class to get concrete classes from database and store them in a Hashtable.
+ class ShapeCache {
 
- class Sheep implements Animal {
+    private static final Hashtable<String, PShape> shapeMap  = new Hashtable<>();
 
-   public Sheep(){
+    public static PShape getShape(String shapeId) {
+        PShape cachedShape = shapeMap.get(shapeId);
+        return (PShape) cachedShape.clone();
+    }
 
-      System.out.println("Sheep is Made");
+    // for each shape run database query and create shape
+    // shapeMap.put(shapeKey, shape);
+    // for example, we are adding three shapes
 
-   }
+    public static void loadCache() {
+        PCircle circle = new PCircle();
+        circle.setId("1");
+        shapeMap.put(circle.getId(),circle);
 
-   public Animal makeCopy() {
+        PSquare square = new PSquare();
+        square.setId("2");
+        shapeMap.put(square.getId(),square);
 
-      System.out.println("Sheep is Being Made");
-
-      Sheep sheepObject = null;
-
-      try {
-
-         // Calls the Animal super classes clone()
-         // Then casts the results to Sheep
-
-         sheepObject = (Sheep) super.clone();
-
-      }
-
-      // If Animal didn't extend Cloneable this error
-      // is thrown
-
-      catch (CloneNotSupportedException e) {
-
-         System.out.println("The Sheep was Turned to Mush");
-
-         e.printStackTrace();
-
-      }
-
-      return sheepObject;
-   }
-
-   public String toString(){
-
-      return "Dolly is my Hero, Baaaaa";
-
-   }
-
+        PRectangle rectangle = new PRectangle();
+        rectangle.setId("3");
+        shapeMap.put(rectangle.getId(), rectangle);
+    }
 }
 
 
+//        Step 4
+//        PrototypePatternDemo uses ShapeCache class to get clones of shapes stored in a Hashtable.
+ class PrototypePatternDemo {
+    public static void main(String[] args) {
+        ShapeCache.loadCache();
+
+        PShape clonedShape = ShapeCache.getShape("1");
+        System.out.println("Shape : " + clonedShape.getType());
 
 
- class CloneFactory {
+        PShape clonedShape2 = ShapeCache.getShape("2");
+        System.out.println("Shape : " + clonedShape2.getType());
 
-   // Receives any Animal, or Animal subclass and
-   // makes a copy of it and stores it in its own
-   // location in memory
-
-   // CloneFactory has no idea what these objects are
-   // except that they are subclasses of Animal
-
-   public Animal getClone(Animal animalSample) {
-
-      // Because of Polymorphism the Sheeps makeCopy()
-      // is called here instead of Animals
-
-      return animalSample.makeCopy();
-
-   }
-
+        PShape clonedShape3 = ShapeCache.getShape("3");
+        System.out.println("Shape : " + clonedShape3.getType());
+    }
 }
 
- class TestCloning {
 
-   public static void main(String[] args){
-
-      // Handles routing makeCopy method calls to the
-      // right subclasses of Animal
-
-      CloneFactory animalMaker = new CloneFactory();
-
-      // Creates a new Sheep instance
-
-      Sheep sally = new Sheep();
-
-      // Creates a clone of Sally and stores it in its own
-      // memory location
-
-      Sheep clonedSheep = (Sheep) animalMaker.getClone(sally);
-
-      // These are exact copies of each other
-
-      System.out.println(sally);
-
-      System.out.println(clonedSheep);
-
-      System.out.println("Sally HashCode: " + System.identityHashCode(System.identityHashCode(sally)));
-
-      System.out.println("Clone HashCode: " + System.identityHashCode(System.identityHashCode(clonedSheep)));
-   }
-
-}
+//        Step 5
+//        Verify the output.
+//
+//        Shape : Circle
+//        Shape : Square
+//        Shape : Rectangle}

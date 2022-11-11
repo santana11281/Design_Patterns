@@ -112,3 +112,8 @@ class User {
 
     }
 }
+
+
+//        User: Lokesh, Gupta, 30, 1234567, Fake address 1234
+//        User: Jack, Reacher, 40, 5655, null
+//        User: Super, Man, 0, null, null
